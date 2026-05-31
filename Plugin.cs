@@ -7,7 +7,7 @@ using Receiver2;
 
 namespace GoldenGuns
 {
-    [BepInPlugin("GoldenGuns", "GoldenGuns", "2.0.0")]
+    [BepInPlugin("GoldenGuns", "GoldenGuns", "2.1.0")]
     public class Plugin : BaseUnityPlugin
     {
         private static Dictionary<string, string> gunmap = new Dictionary<string, string>
@@ -92,20 +92,19 @@ namespace GoldenGuns
                 {
                     currentLoadout.gun_internal_name = gunmap[originalGunName];
 
-                    if (magmap.ContainsKey(originalGunName))
+                    foreach (PlayerLoadoutEquipment equipment in currentLoadout.equipment)
                     {
-                        string goldenMagName = magmap[originalGunName];
-                        foreach (PlayerLoadoutEquipment equipment in currentLoadout.equipment)
+                        if (equipment.equipment_type == EquipmentType.Magazine &&
+                            magmap.ContainsKey(originalGunName) &&
+                            equipment.magazine_class == MagazineClass.StandardCapacity)
                         {
-                            if (equipment.equipment_type == EquipmentType.Magazine)
-                            {
-                                if (equipment.magazine_class == MagazineClass.StandardCapacity)
-                                {
-                                    equipment.internal_name = goldenMagName;
-                                    equipment.magazine_class = MagazineClass.StandardCapacityGold;
-                                }
-
-                            }
+                            equipment.internal_name = magmap[originalGunName];
+                            equipment.magazine_class = MagazineClass.StandardCapacityGold;
+                        }
+                        else if (equipment.equipment_type == EquipmentType.Flashlight &&
+                                 __instance.MallData.IsItemGroupUnlocked("wolfire.flashlight_gold"))
+                        {
+                            equipment.internal_name = "wolfire.flashlight_gold";
                         }
                     }
                 }

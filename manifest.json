@@ -1,12 +1,9 @@
 {
     "name": "GoldenGuns",
-    "version_number": "2.0.0",
+    "version_number": "2.1.0",
     "website_url": "https://github.com/luther7718/Receiver2-GoldenGuns",
-    "description": "Improved version of GoldGunsInDreaming by arti. This version is configurable for The Dreaming and/or Classic Mode, and spawns golden magazines too.",
+    "description": "Use Golden Guns unlocked in the Compound in The Dreaming! Improved version of arti's GoldGunsInDreaming.",
     "dependencies": [
         "BepInEx-BepInExPack-5.4.2305"
-    ],
-    "incompatibilities": [
-        "arti-GoldGunsInDreaming-1.0.0"
     ]
 }
